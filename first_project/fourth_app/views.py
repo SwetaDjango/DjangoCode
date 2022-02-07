@@ -1,0 +1,50 @@
+from django.shortcuts import render
+
+# Create your views here.
+from django.http import HttpResponse
+from fourth_app.models import Topic, Webpage, AccessRecord
+
+
+# part 1
+# def index(request):
+#     return HttpResponse("This is the second app home page")
+# def secondpage(request):
+#     return HttpResponse("This is second page for the website")
+# def helloworld(request):
+#     return HttpResponse("hello world")
+# def regex(request):
+#     return HttpResponse("This is regex")
+# =========================
+# # Part 2
+def index(request):
+    #my_dict = {'insert_me': "Now I am coming from fourth_app/index.html! but from index1",
+               #'topic_name': "Django Tutorial"}
+    webpages_list = AccessRecord.objects.order_by('date')
+    date_dict = {'access_records': webpages_list}
+    # return render(request, 'fourth_app/index.html', context=my_dict)
+    return render(request, 'fourth_app/index.html', context=date_dict)
+
+
+#
+def index1(request):
+    my_dict = {'insert_me': "Now I am coming from first_app/index.html! but from index1",
+               'topic_name': "Django Tutorial"}
+    return render(request, 'fourth_app/index.html', context=my_dict)
+
+
+#
+# def helloworld(request):
+#     return HttpResponse("hello world")
+
+def helloworld(request):
+    return render(request, 'fourth_app/helloworld.html', )
+
+
+def regex(request):
+    return HttpResponse("This is for regex")
+
+
+def static_index(request):
+    return render(request, 'fourth_app/static_index.html', )
+
+# A Context is a dictionary with variable names as the key and their values as the value.
